@@ -1,9 +1,9 @@
 #                 GROUP PROJECT-0X11.C-PRINTF
      
-##Write your own printf function
+##       Write your own printf function
 
 
-##COMPILATION
+##      COMPILATION
 Your code will be compiled this way:
 $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c
 
@@ -12,7 +12,7 @@ Our main files will include your main header file (main.h): #include main.h
 You might want to look at the gcc flag -Wno-format when testing with your _printf and the standard printf.
 
 
-##TASKS
+##     TASKS
 
 0. Write a function that produces output according to a format.
 
