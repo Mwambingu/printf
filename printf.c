@@ -40,7 +40,7 @@ int _printf(const char *format, ...)
 		{
 			if (format[i + 1] != '\0')
 			{
-				func = get_op(format[i + 1]);
+				func = f_cvt(format[i + 1]);
 			
 			}
 			if (func == NULL)
