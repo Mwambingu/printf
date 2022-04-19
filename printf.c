@@ -3,24 +3,23 @@
 #include <stddef.h>
 
 /**
- *f_cvt - select function for conversion char
+ *get_op - select function for conversion char
  *@c: char to check
  *Return: pointer to function
  */
 
-int (*f_cvt(const char c))(va_list)
+int (*get_op(const char c))(va_list)
 {
 	int i = 0;
 
 	flags_p fp[] = {
 		{"c", print_char},
 		{"s", print_str},
-		{"%", print_percent},
 		{"i", print_nbr},
-		{"d", print_nbr}
+		{"d", print_nbr},
+		{"%", print_percent}
 	};
-
-	while (i < 2)
+	while (i < 14)
 	{
 		if (c == fp[i].c[0])
 		{
@@ -36,6 +35,7 @@ int (*f_cvt(const char c))(va_list)
  *@format: format string
  *Return: value of printed chars
  */
+
 int _printf(const char *format, ...)
 {
 	va_list ap;
@@ -43,9 +43,7 @@ int _printf(const char *format, ...)
 	int (*func)();
 
 	if (!format || (format[0] == '%' && format[1] == '\0'))
-	{
 		return (-1);
-	}
 	va_start(ap, format);
 
 	while (format[i])
@@ -53,9 +51,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			if (format[i + 1] != '\0')
-			{
-				func = f_cvt(format[i + 1]);
-			}
+				func = get_op(format[i + 1]);
 			if (func == NULL)
 			{
 				_putchar(format[i]);
