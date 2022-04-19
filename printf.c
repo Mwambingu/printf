@@ -1,106 +1,68 @@
-#include <stdio.h>
 #include <stdarg.h>
-#include <stdlib.h>
-#include <string.h>
 #include "main.h"
-char *_strrev(char *str)
+#include <stddef.h>
+
+int (*f_cvt(const char c))(va_list)
 {
-	int i;
-	int len = 0;
-	char c;
+	int i = 0;
 
-	if (!str)
-	{
-		return (NULL);
-	}
-	while (str[len] != '\0')
-	{
-		len++;
-	}
-	for (i = 0; i < (len / 2); i++)
-	{
-		c = str[i];
-		str[i] = str[len - i - 1];
-		str[len - i - 1] = c;
-	}
-	return (str);
-}
+	flags_p fp[] = {
+		{"c", print_char},
+		{"s", print_str}
+	};
 
-char *_itoa(int i, char *strout, int base)
-{
-	char *str = strout;
-	int digit, sign = 0;
-
-	if (i < 0)
+	while (i < 2)
 	{
-		sign = 1;
-		i *= -1;
+		if (c == fp[i].c[0])
+		{
+			return (fp[i].f);
+		}
+		i++;
 	}
-	while (i)
-	{
-		digit = i % base;
-		*str = (digit > 9) ? ('A' + digit - 10) : '0' + digit;
-		i = i / base;
-		str++;
-	}
-	if (sign)
-	{
-		*str++ = '-';
-	}
-	*str = '\0';
-	_strrev(strout);
-	return (strout);
+	return (NULL);
 }
 
 int _printf(const char *format, ...)
 {
-va_list vl;
-int i = 0, j = 0;
-char buff[100] = {0}, tmp[20];
-char *str_arg;
+	va_list ap;
+	int sum = 0, i = 0;
+	int (*func)();
 
-va_start(vl, format);
-while (format && format[i])
-{
-if (format[i] == '%')
-{
-i++;
-switch (format[i])
-{
-case 'c':
-buff[j] = (char)va_arg(vl, int);
-j++;
-break;
-case 'd':
-_itoa(va_arg(vl, int), tmp, 10);
-strcpy(&buff[j], tmp);
-j += strlen(tmp);
-break;
-case 'x':
-_itoa(va_arg(vl, int), tmp, 16);
-strcpy(&buff[j], tmp);
-j += strlen(tmp);
-break;
-case 'o':
-_itoa(va_arg(vl, int), tmp, 8);
-strcpy(&buff[j], tmp);
-j += strlen(tmp);
-break;
-case 's':
-str_arg = va_arg(vl, char *);
-strcpy(&buff[j], str_arg);
-j += strlen(str_arg);
-break;
-}
-}
-else
-{
-buff[j] = format[i];
-j++;
-}
-i++;
-}
-fwrite(buff, j, 1, stdout);
-va_end(vl);
-return (j);
+	if (!format || (format[0] == '%' && format[1] == '\0'))
+	{
+		return (-1);
+	}
+	va_start(ap, format);
+
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			if (format[i + 1] != '\0')
+			{
+				func = get_op(format[i + 1]);
+			
+			}
+			if (func == NULL)
+			{
+				_putchar(format[i]);
+				sum++;
+				i++;
+			}
+			else
+			{
+				sum += func(ap);
+				i += 2;
+				continue;
+			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			sum ++;
+			i++;
+		}
+	}
+	va_end(ap);
+	return (sum);
 }
