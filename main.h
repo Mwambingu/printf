@@ -1,15 +1,14 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <stdio.h>
 #include <stdarg.h>
-#include <stddef.h>
 #include <stdlib.h>
 
-/**
- *struct structprint - structure containing
- *@q: the location and method to translate data to characters.
- *@u: print function for specific type.
- *
- *Return: int
- */
+
+int _printf(const char *format, ...);
+int _putchar(char c);
+int print_decimal(va_list args);
+int print_integer(va_list args);
+
 #endif
