@@ -15,7 +15,9 @@ int (*f_cvt(const char c))(va_list)
 	flags_p fp[] = {
 		{"c", print_char},
 		{"s", print_str},
-		{"%", print_percent}
+		{"%", print_percent},
+		{"i", print_nbr},
+		{"d", print_nbr}
 	};
 
 	while (i < 2)

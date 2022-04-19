@@ -14,20 +14,13 @@ int _puts(char *str, int ascii);
 int convert_alpha_numeric(int nb, int upper);
 char *convert_base(unsigned long nb, unsigned int base, int upper);
 int print_percent(va_list args __attribute__((unused)));
-<<<<<<< HEAD
 int print_nbr(va_list ap);
 int print_binary(va_list ap);
 int print_octal(va_list ap);
 int print_hexa_lower(va_list ap);
 int print_hexa_upper(va_list ap);
-
-/*int print_decimal(va_list args);*/
-/*int print_integer(va_list args);*/
-
-=======
 int _strlen_recursion(char *s);
 char *_strdup(char *str);
->>>>>>> 9a44932279423733f89ff5eb9c3e3fea314398f7
 /**
  * struct flags_printf - struct converstion to function
  * @c: flag string
