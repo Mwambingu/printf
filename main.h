@@ -13,7 +13,7 @@ int print_str(va_list ap);
 int _puts(char *str, int ascii);
 int convert_alpha_numeric(int nb, int upper);
 char *convert_base(unsigned long nb, unsigned int base, int upper);
-
+int print_percent(va_list args __attribute__((unused)));
 /*int print_decimal(va_list args);*/
 /*int print_integer(va_list args);*/
 
