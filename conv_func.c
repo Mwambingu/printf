@@ -1,5 +1,13 @@
 #include <stdlib.h>
 #include "main.h"
+
+/**
+ *convert_alpha_numeric - convert digits to char
+ *@nb: digit or number
+ *@upper: upper case check
+ *Return: converted value
+ */
+
 int convert_alpha_numeric(int nb, int upper)
 {
 	if (nb >= 10)
@@ -11,6 +19,14 @@ int convert_alpha_numeric(int nb, int upper)
 		return (nb + '0');
 	}
 }
+
+/**
+ *convert_base - convert unsigned from base 10 to base
+ *@nb: decimal number
+ *@base: base to convert from
+ *@upper: upper case check
+ *Return: converted number to string
+ */
 
 char *convert_base(unsigned long nb, unsigned int base, int upper)
 {

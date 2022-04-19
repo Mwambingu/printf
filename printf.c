@@ -2,6 +2,12 @@
 #include "main.h"
 #include <stddef.h>
 
+/**
+ *f_cvt - select function for conversion char
+ *@c: char to check
+ *Return: pointer to function
+ */
+
 int (*f_cvt(const char c))(va_list)
 {
 	int i = 0;
@@ -22,6 +28,11 @@ int (*f_cvt(const char c))(va_list)
 	return (NULL);
 }
 
+/**
+ *_printf - Reproduce behavior of printf function
+ *@format: format string
+ *Return: value of printed chars
+ */
 int _printf(const char *format, ...)
 {
 	va_list ap;
@@ -39,27 +50,21 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			if (format[i + 1] != '\0')
-			{
 				func = f_cvt(format[i + 1]);
-			
-			}
+
 			if (func == NULL)
-			{
 				_putchar(format[i]);
 				sum++;
 				i++;
-			}
 			else
-			{
 				sum += func(ap);
 				i += 2;
 				continue;
-			}
 		}
 		else
 		{
 			_putchar(format[i]);
-			sum ++;
+			sum++;
 			i++;
 		}
 	}

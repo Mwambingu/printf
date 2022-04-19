@@ -3,6 +3,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/**
+ *print_char - print single char
+ *@ap: arg list
+ *Return: number of printed char
+ */
+
 int print_char(va_list ap)
 {
 	char c = va_arg(ap, int);
@@ -14,6 +20,12 @@ int print_char(va_list ap)
 	_putchar(c);
 	return (1);
 }
+
+/**
+ *print_str - print string
+ *@ap: arg list
+ *Return: number of printed char
+ */
 
 int print_str(va_list ap)
 {
