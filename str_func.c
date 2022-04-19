@@ -42,53 +42,93 @@ int print_str(va_list ap)
 }
 
 /**
- *_strlen_recursion - return the length of a string
- *
- *@s: char pointer
- *
- * Return: the length of a string
+ *print_str_unprintable - unprint some characters
+ *@ap: arg list
+ *Return: number of printed char
  */
-int _strlen_recursion(char *s)
+
+int print_str_unprintable(va_list ap)
 {
-	if (*s != '\0')
+	char *argument = va_arg(ap, char *);
+	int sum = 0;
+
+	if (!argument)
 	{
-		return (_strlen_recursion(s + 1) + 1);
+		sum += _puts("(null)", 0);
+		return (sum);
 	}
-	else
-	{
-		return (0);
-	}
+
+	return (_puts(argument, 1));
 }
 
 /**
- * _strdup - a pointer to a newly allocated space in memory,
- *           which contains a copy of the string given as a parameter.
- *
- *@str: char pointer to copy
- *
- *Return: a new char pointer
+ *print_str_reverse - reverse a string
+ *@ap: arg list
+ *Return: number printed char
  */
-char *_strdup(char *str)
+int print_str_reverse(va_list ap)
 {
-	char *s;
-	int cLoop;
+	char *argument = va_arg(ap, char *), *str;
+	int size, left, limit, right, sum = 0;
+
+	if (!argument)
+	{
+		sum += _puts("%r", 0);
+		return (sum);
+	}
+
+	size = _strlen_recursion(argument);
+	right = size - 1;
+	limit = (size % 2 == 0) ? (size + 1) / 2 : (size / 2);
+
+	str = malloc(sizeof(char) * size + 1);
 
 	if (str == NULL)
 	{
-		return (NULL);
+		return (0);
 	}
 
-	s = malloc(sizeof(char) * (_strlen_recursion(str) + 1));
-
-	if (s == NULL)
+	if (size % 2 != 0)
 	{
-		return (NULL);
+		str[limit] = argument[limit];
 	}
 
-	for (cLoop = 0; cLoop < _strlen_recursion(str) + 1; cLoop++)
+	for (left = 0; left < limit; left++)
 	{
-		s[cLoop] = str[cLoop];
+		str[left] = argument[right];
+		str[right] = argument[left];
+		right--;
 	}
 
-	return (s);
+	str[size] = '\0';
+
+	sum = _puts(str, 0);
+	free(str);
+
+	return (sum);
+}
+
+/**
+ *print_rot13 - print string with rot13
+ *@ap: arg list
+ *Return: number of printed char
+ */
+
+int print_rot13(va_list ap)
+{
+	int sum = 0;
+	char *str, *argument = va_arg(ap, char*);
+
+	if (!argument)
+	{
+		sum += _puts("%R", 0);
+		return (sum);
+	}
+
+	str = convert_rot13(argument);
+	if (!str)
+		return (0);
+	sum = _puts(str, 0);
+	free(str);
+	return (sum);
 }

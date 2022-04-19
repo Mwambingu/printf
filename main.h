@@ -28,15 +28,9 @@ char *_strdup(char *str);
 char *convert_base_pointer(unsigned long p);
 
 /**
-<<<<<<< HEAD
  * struct flags_printf - struct conversion to function
  * @c: flag string
  * @f: pointer to func
-=======
- *struct flags_printf - struct conversion to function
- *@c: flag string
- *@f: pointer to func
->>>>>>> c05826eb9c1e979620bd0b68a33768ddafa643a9
  */
 
 typedef struct flags_printf
