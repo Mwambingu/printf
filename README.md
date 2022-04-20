@@ -14,7 +14,14 @@ The available convertion specifiers are:
 * %s: Prints a string of characters.
 * %d: Prints integers.
 * %i: Prints integers.
-
+* %r: Prints a reversed string.
+* %R: Prints a rot13'ed string.
+* %p: Prints address.
+* %u: Prints unsigned integer.
+* %o: Prints to octal base.
+* %x: Prints to hexadecimal lower.
+* %X: Prints to hexadecimal upper.
+* %b: Prints to binary base.
 
 ##      Authorized functions and macros
 * 'write (man 2 write)'
@@ -68,3 +75,44 @@ See 'man_3_print' for more detail.
 
 ####   2. Create a man page for your function.
 > File: 'man_3_printf'
+
+
+#### 3. Handle the following custom conversion specifiers:
+
+> * b: the unsigned int argument is converted to binary
+
+#### 4. Handle the following conversion specifiers:
+
+> * u
+> * o
+> * x
+> * X
+> You don’t have to handle the flag characters
+> You don’t have to handle field width
+> You don’t have to handle precision
+> You don’t have to handle the length modifiers
+
+#### 5. Use a local buffer of 1024 chars in order to call write as little as possible.
+
+#### 6. Handle the following conversion specifier: 
+> * p
+
+> You don’t have to handle the flag characters
+> You don’t have to handle field width
+> You don’t have to handle precision
+> You don’t have to handle the length modifiers
+
+#### 7. Handle the following custom conversion specifier:
+
+> S : prints the string.
+> Non printable characters (0 < ASCII value < 32 or >= 127) are printed this way: \x, 
+> followed by the ASCII code value in hexadecimal (upper case - always 2 characters)
+
+#### 14. Handle the following custom conversion specifier:
+
+> r : prints the reversed string
+
+#### 15. Handle the following custom conversion specifier:
+
+> R: prints the rot13'ed string
+
